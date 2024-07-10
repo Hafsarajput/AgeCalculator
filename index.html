@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #71b7e6, #712a8d);
+            
+        }
+        .container {
+            background: url('./images/pic.jpg');
+    
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            
+           
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            color: #333;
+        }
+        input {
+            margin: 10px 0;
+            padding: 10px;
+            width: calc(100% - 22px);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        p {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        input[type="number"] {
+        background-color: transparent;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 8px 12px;
+        outline: none; /* Remove default focus outline */
+        color: white; /* Text color */
+        
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="color: white; font-family: 'Lucida Console', monospace;">Age Calculator</h1>
+        <h6 style=" font-family: 'Lucida Console', monospace;"><input type="number" id="day" placeholder="Day" min="1" max="31">
+        <input type="number" id="month" placeholder="Month" min="1" max="12">
+        <input type="number" id="year" placeholder="Year" min="1900" max="2024"></h6>
+        
+        <button class="btn btn-outline-dark btn-lg" style="color: white;" onclick="calculateAge()">Calculate Age</button>
+
+
+        <p id="result"></p>
+    </div>
+    <script>
+        function calculateAge() {
+            let day = document.getElementById('day').value;
+            let month = document.getElementById('month').value;
+            let year = document.getElementById('year').value;
+
+            if (!day || !month || !year) {
+                alert("Please enter a valid date of birth.");
+                return;
+            }
+
+            let birthDate = new Date(year, month - 1, day);
+            let today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            let monthDiff = today.getMonth() - birthDate.getMonth();
+            let dayDiff = today.getDate() - birthDate.getDate();
+
+            if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+                age--;
+            }
+
+            var resultElement = document.getElementById('result');
+resultElement.innerText = "Your age is: " + age + " years";
+
+// Change the text color to white
+resultElement.style.color = "white";
+resultElement.style.fontSize = "25px"; // Adjust the font size as needed
+
+// Change the font family
+resultElement.style.fontFamily = "Lucida Console, Monaco, monospace"; 
+resultElement.style.background = "linear-gradient(135deg, #71b7e6, #712a8d)";
+resultElement.style.borderRadius = "10px";
+        }
+    </script>
+</body>
+</html>
